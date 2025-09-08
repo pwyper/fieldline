@@ -10,7 +10,7 @@ Consult the quickstart guide for more details.
 Current and previous versions of this code have been used in several papers. 
 The most recent (where most of the features are demonstrated) is: [Wyper et al. 2024 ApJ 975 168](https://iopscience.iop.org/article/10.3847/1538-4357/ad7941)
 
-A non-exhustive list of other papers to use the code:
+Below is a non-exhustive list of other papers to use the code:
 
 [Dahlin et al. 2025, ApJ, accepted](https://arxiv.org/abs/2504.00913)
 
