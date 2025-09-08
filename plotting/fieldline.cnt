@@ -1,0 +1,13 @@
+ .true.		  	   !spherical?
+ .false.,.false.,.false.   !x,y,z periodic?
+ .false.,.true.,.true.	   !save field line positions?, save field line lengths?, save twist?
+ 0, 400,400                !n1,n2,n3 - 0 in r direction = plane of constant r
+ 1.0, -30.0, -30.0         !rlo - r=1 plane, bottom corner
+ 1.0, +30.0, +30.0         !rhi - r=1 plane, top corner
+ .false.                   !adpative step during tracing? If false, use lstart. - don't use with Q
+ 3000, 0.01, 0.02, 1e-1    !nsteps,lstart,lmax, error bound - lengths in Solar Radii for spherical
+ 1                         !no. snapshots, list of snapshots below
+0210003
+
+
+

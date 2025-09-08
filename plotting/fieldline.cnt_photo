@@ -1,0 +1,12 @@
+ .true.		  	  !spherical?
+ .false.,.false.,.false.   !x,y,z periodic?
+ .false.,.true.,.true.	 	  !save field line positions?, save field line lengths?, save twist?
+ 0, 400,400              !n1,n2,n3
+ 1.0, -40.0, -40.0       !rlo
+ 1.0, +40.0, +40.0       !rhi
+ 1500, 0.02, 0.05, 1e-6   !nsteps,lstart,lmax, error bound
+ 1                        !no. snapshots
+0210003
+0354189
+
+
