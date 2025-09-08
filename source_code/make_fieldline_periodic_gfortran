@@ -1,0 +1,72 @@
+
+# This makefile compiles fieldline for gfortran
+
+# define the application object files
+APP_OBJECTS=	bfield_common.o \
+		fbfield.o \
+		rbfield.o \
+		interp_block.o \
+		next_block.o \
+		rk4_per.o \
+		boundary_per.o \
+		poscheck.o \
+		qsl_rhs.o \
+		twist.o \
+		fieldline_per.o
+
+.SUFFIXES : .o .F .f .c
+.F.o :
+	$(FC) $(FFLAGS) -c $<
+.f.o :
+	$(FC) $(FFLAGS) -c $<
+.c.o :
+	$(CC) $(CFLAGS) -c $<
+
+# Handles operating system issues
+ARCH := $(shell uname -m)
+
+ifeq ($(ARCH),arm64)
+    # Apple Silicon (M1, M2, etc.)
+    ARCH_FLAGS := 
+else ifeq ($(ARCH),x86_64)
+    # Intel Mac
+    ARCH_FLAGS := -mcmodel=small
+endif
+
+# Tunable parameters
+#
+# CC		Name of the C compiling system to use
+# FC		Name of the fortran compiling system to use
+# LDFLAGS	Flags to the loader
+# LIBS		List of libraries
+# CMD		Name of the executable
+# PROFLIB	Library needed for profiling
+# CFLAGS        Flags to the C compiler
+# FFLAGS        Flags to the fortran compiler
+
+CC =		pgcc
+FC =		gfortran
+LDFLAGS =	
+LIBS =		
+CMD =		fieldline
+PROFLIB =	
+CFLAGS =	-O3 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_GNU_SOURCE -I. -L.
+
+# optimized compilation with 64-bit reals
+
+#FFLAGS =	-i4 -r8 -Ktrap=fp -byteswapio -O3 -unroll2
+
+# optimized compilation with 32-bit reals
+
+#FFLAGS =	-i4 -r4 -Ktrap=fp -byteswapio -O3 -unroll2
+
+# Define FFLAGS for all selected options:
+
+FFLAGS = -fdefault-real-8 -O3 $(ARCH_FLAGS)
+
+# Lines from here on down should not need to be changed.  They are the
+# actual rules which make uses to build the command
+
+$(CMD):		$(APP_OBJECTS)
+	$(FC) $(LDFLAGS) -o $(@) $(APP_OBJECTS) $(LIBS)
+
